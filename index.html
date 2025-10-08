@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Globel Time Line</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+   <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Globel Time Line</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavContent">
+            <div class="nav-categories d-lg-flex">
+                <a href="#" class="nav-category active" onclick="filterByCategory('all', event)">All</a>
+                <a href="#" class="nav-category" onclick="filterByCategory('World', event)">World</a>
+                <a href="#" class="nav-category" onclick="filterByCategory('Technology', event)">Tech</a>
+                <a href="#" class="nav-category" onclick="filterByCategory('Business', event)">Business</a>
+                <a href="#" class="nav-category" onclick="filterByCategory('Sports', event)">Sports</a>
+            </div>
+            <div class="ms-auto" style="position: relative;">
+                <input type="text" id="searchInput" class="search-box" placeholder="Search news..." oninput="handleSearch(this.value)">
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <div style="margin-top: 90px;">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Sidebar -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="sidebar">
+                        <div class="sidebar-section">
+                            <div class="sidebar-title">Categories</div>
+                            <div class="category-item" onclick="filterByCategory('all')">
+                                <i class="fas fa-globe"></i>
+                                <span>All News</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('World')">
+                                <i class="fas fa-earth-americas"></i>
+                                <span>World</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('Politics')">
+                                <i class="fas fa-landmark"></i>
+                                <span>Politics</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('Technology')">
+                                <i class="fas fa-microchip"></i>
+                                <span>Technology</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('Business')">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Business</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('Sports')">
+                                <i class="fas fa-futbol"></i>
+                                <span>Sports</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('Entertainment')">
+                                <i class="fas fa-film"></i>
+                                <span>Entertainment</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('Health')">
+                                <i class="fas fa-heart-pulse"></i>
+                                <span>Health</span>
+                            </div>
+                            <div class="category-item" onclick="filterByCategory('Science')">
+                                <i class="fas fa-flask"></i>
+                                <span>Science</span>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <div class="sidebar-title">Trending Now</div>
+                            <div class="trending-item">
+                                <span class="trending-number">1</span>
+                                Climate Summit Reaches Historic Agreement
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-number">2</span>
+                                Tech Giants Announce AI Breakthrough
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-number">3</span>
+                                Global Markets React to Economic Data
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-number">4</span>
+                                Championship Finals Draw Record Viewers
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-number">5</span>
+                                New Medical Discovery Shows Promise
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-lg-6">
+                    <!-- Breaking News -->
+                    <div class="breaking-news">
+                        <span class="breaking-badge"><i class="fas fa-bolt"></i> BREAKING</span>
+                        <h4 style="margin: 0; font-weight: bold;">Major Diplomatic Agreement Signed Between Nations</h4>
+                        <p style="margin: 0.5rem 0 0 0; opacity: 0.9;">Leaders meet to finalize historic peace accord - Updated 5 minutes ago</p>
+                    </div>
+
+                    <!-- Featured Article -->
+                    <div class="featured-article">
+                        <span class="featured-category">FEATURED</span>
+                        <h2 class="featured-title">The Future of Space Exploration: Journey to Mars</h2>
+                        <p class="featured-excerpt">Scientists reveal groundbreaking plans for the first manned mission to the Red Planet, marking a new era in human space exploration.</p>
+                        <a href="#" class="read-more-btn">Read Full Story</a>
+                    </div>
+
+                    <!-- Articles Feed -->
+                    <div id="articles-container"></div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="sidebar">
+                        <div class="sidebar-section">
+                            <div class="sidebar-title">Popular Today</div>
+                            <div style="margin-bottom: 1rem;">
+                                <img src="https://picsum.photos/300/180?random=20" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;" alt="News">
+                                <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem;">Tech Innovation Reshapes Industry</div>
+                                <div style="font-size: 0.85rem; color: var(--light-text);">2 hours ago</div>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <img src="https://picsum.photos/300/180?random=21" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;" alt="News">
+                                <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem;">Markets Surge on Positive Data</div>
+                                <div style="font-size: 0.85rem; color: var(--light-text);">4 hours ago</div>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <img src="https://picsum.photos/300/180?random=22" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;" alt="News">
+                                <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem;">Environmental Policy Changes</div>
+                                <div style="font-size: 0.85rem; color: var(--light-text);">6 hours ago</div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <div class="sidebar-title">Newsletter</div>
+                            <p style="font-size: 0.9rem; color: var(--light-text); margin-bottom: 1rem;">Get daily news updates delivered to your inbox</p>
+                            <input type="email" class="form-control mb-2" placeholder="Your email" style="border-radius: 25px;">
+                            <button class="btn w-100" style="background: var(--primary-color); color: white; border-radius: 25px; font-weight: 600;">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/main.js"></script>
+</body>
+</html>
