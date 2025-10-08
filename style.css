@@ -1,6 +1,6 @@
 
         :root {
-            --primary-color: #0046FF;
+            --primary-color: #8C1007;
             --secondary-bg: #f8f9fa;
             --dark-text: #1a1a1a;
             --light-text: #6c757d;
@@ -389,4 +389,5 @@
         align-items: flex-start;
         gap: 1rem;
     }
+
 }
